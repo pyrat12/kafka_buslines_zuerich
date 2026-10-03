@@ -31,11 +31,23 @@ if (window.ResizeObserver && mapContainer) {
 var LINE_COLORS = {
     '00001': '#ff5c5c',
     '00002': '#ffc857',
-    '00003': '#4fd18b'
+    '00003': '#4fd18b',
+    '00004': '#5ca8ff' // NEU: Farbe für die vierte Buslinie definieren
 };
 
-var mapMarkers = { '00001': null, '00002': null, '00003': null };
-var messageCounts = { '00001': 0, '00002': 0, '00003': 0 };
+var mapMarkers = {
+    '00001': null,
+    '00002': null,
+    '00003': null,
+    '00004': null // NEU: Speicherplatz für den Marker der vierten Buslinie hinzufügen
+};
+
+var messageCounts = {
+    '00001': 0,
+    '00002': 0,
+    '00003': 0,
+    '00004': 0 // NEU: Nachrichtenzähler für die vierte Buslinie hinzufügen
+};
 
 function makeIcon(color) {
     return L.divIcon({
@@ -89,6 +101,7 @@ source.addEventListener('message', function (e) {
     if (mapMarkers[obj.busline]) {
         mymap.removeLayer(mapMarkers[obj.busline]);
     }
+
     mapMarkers[obj.busline] = L.marker([obj.latitude, obj.longitude], {
         icon: makeIcon(LINE_COLORS[obj.busline])
     }).addTo(mymap);

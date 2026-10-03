@@ -16,79 +16,170 @@
 
     <link rel="stylesheet" href="../static/style.css">
   </head>
+
   <body>
+
     <header class="app-header">
+
       <div class="brand">
+
         <div class="brand-icon">🚌</div>
+
         <div>
+
           <h1>Zürich Bus Live Map</h1>
+
           <p>Real-time vehicle positions streamed through Apache Kafka</p>
+
         </div>
+
       </div>
+
       <div class="conn-badge">
+
         <span class="conn-dot" id="conn-dot"></span>
+
         <span id="conn-label">Connecting…</span>
+
       </div>
+
     </header>
 
+
     <div class="layout">
+
       <aside>
+
         <div class="card">
+
           <h2>About</h2>
-          <p>This app simulates three Zürich bus lines. Each line publishes GPS
+
+          <!-- NEU: Text von drei auf vier simulierte Buslinien angepasst -->
+          <p>This app simulates four Zürich bus lines. Each line publishes GPS
             checkpoints to a Kafka topic every 500&nbsp;ms, and the map below
             updates live as new positions arrive over a server-sent event stream.</p>
+
         </div>
 
+
         <div class="card">
+
           <h2>Data pipeline</h2>
+
           <div class="pipeline">
-            <div class="pipeline-step"><span class="num">1</span> 3 Python producers generate coordinates</div>
+
+            <!-- NEU: Anzahl Producer von 3 auf 4 angepasst -->
+            <div class="pipeline-step"><span class="num">1</span> 4 Python producers generate coordinates</div>
+
             <div class="pipeline-arrow">↓</div>
+
             <div class="pipeline-step"><span class="num">2</span> Kafka topic <code>busdata001</code></div>
+
             <div class="pipeline-arrow">↓</div>
+
             <div class="pipeline-step"><span class="num">3</span> Flask consumer</div>
+
             <div class="pipeline-arrow">↓</div>
+
             <div class="pipeline-step"><span class="num">4</span> Leaflet map, live in browser</div>
+
           </div>
+
         </div>
 
+
         <div class="card">
+
           <h2>Bus lines</h2>
+
           <div id="legend">
+
             <div class="legend-item">
+
               <span class="legend-swatch" style="background:#ff5c5c"></span>
+
               <div class="legend-info">
+
                 <div class="name">Line 00001</div>
+
                 <div class="meta" id="meta-00001">waiting for data…</div>
+
               </div>
+
               <span class="legend-count" id="count-00001">0</span>
+
             </div>
+
+
             <div class="legend-item">
+
               <span class="legend-swatch" style="background:#ffc857"></span>
+
               <div class="legend-info">
+
                 <div class="name">Line 00002</div>
+
                 <div class="meta" id="meta-00002">waiting for data…</div>
+
               </div>
+
               <span class="legend-count" id="count-00002">0</span>
+
             </div>
+
+
             <div class="legend-item">
+
               <span class="legend-swatch" style="background:#4fd18b"></span>
+
               <div class="legend-info">
+
                 <div class="name">Line 00003</div>
+
                 <div class="meta" id="meta-00003">waiting for data…</div>
+
               </div>
+
               <span class="legend-count" id="count-00003">0</span>
+
             </div>
+
+
+            <!-- NEU: Vierte Buslinie zur Legende hinzugefügt -->
+            <div class="legend-item">
+
+              <span class="legend-swatch" style="background:#5ca8ff"></span>
+
+              <div class="legend-info">
+
+                <div class="name">Line 00004</div>
+
+                <div class="meta" id="meta-00004">waiting for data…</div>
+
+              </div>
+
+              <span class="legend-count" id="count-00004">0</span>
+
+            </div>
+
           </div>
+
         </div>
+
       </aside>
 
+
       <div class="card map-card">
+
         <div id="mapid"></div>
+
       </div>
+
     </div>
 
+
     <script src="../static/leaf.js"></script>
+
   </body>
+
 </html>
